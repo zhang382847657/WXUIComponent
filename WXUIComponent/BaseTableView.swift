@@ -35,25 +35,25 @@ public protocol BaseTableViewDelegate {
     func loadData(pageNumber:Int)
 }
 
-public class BaseTableView: UITableView {
+open class BaseTableView: UITableView {
     
     /// 代理
-    public var baseDelegate:BaseTableViewDelegate?
+    open var baseDelegate:BaseTableViewDelegate?
     
     /// 总数据源
-    public final var dataList:Array<AnyObject> = []
+    final var dataList:Array<AnyObject> = []
     
     /// 当前的数据
-    public var data:Array<AnyObject>? {
+    open var data:Array<AnyObject>? {
         didSet{
             updateUI()
         }
     }
     /// 一页显示条数
-    public var pageSize:Int = 20
+    open var pageSize:Int = 20
     
     /// 是否需要头部刷新
-    public var needRefreshHeaderView:Bool = true {
+    open var needRefreshHeaderView:Bool = true {
         didSet {
             if needRefreshHeaderView {
                 self.addHeaderRefresh(actionTarget: self, action: #selector(refresh))
@@ -62,7 +62,7 @@ public class BaseTableView: UITableView {
     }
     
     /// 是否需要尾部加载更多
-    public var needLoadMoreFooterView:Bool = true {
+    open var needLoadMoreFooterView:Bool = true {
         didSet {
             if needLoadMoreFooterView {
                 self.addFooterLoadMore(actionTarget: self, action: #selector(loadMore))
@@ -71,7 +71,7 @@ public class BaseTableView: UITableView {
     }
     
     /// 自定义头部刷新组件
-    public var refreshHeaderView:BaseRefreshView? {
+    open var refreshHeaderView:BaseRefreshView? {
         didSet{
             if refreshHeaderView != nil {
                 self.addHeaderRefresh(headerView: refreshHeaderView!, actionTarget: self, action: #selector(refresh))
@@ -80,7 +80,7 @@ public class BaseTableView: UITableView {
     }
     
     /// 自定义尾部加载更多组件
-    public var loadMoreFooterView:BaseFooterLoadMoreView? {
+    open var loadMoreFooterView:BaseFooterLoadMoreView? {
         didSet{
             if loadMoreFooterView != nil {
                 self.addFooterLoadMore(footerView: loadMoreFooterView!, actionTarget: self, action: #selector(loadMore))
@@ -93,7 +93,7 @@ public class BaseTableView: UITableView {
    
     
     /// 静默刷新，不会触发头部刷新动画
-    public func silentRefresh(){
+    open func silentRefresh(){
         self.isRefresh = true
         self.loadData(pageNumber: 0)
     }
